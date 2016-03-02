@@ -1,0 +1,57 @@
+doctype html
+html(lang="nl")
+    head
+        meta(charset="utf-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        title= title
+        link(rel="stylesheet", href="/assets/css/bootstrap.min.css")
+        link(rel="stylesheet", href="/assets/css/app.css")
+        link(rel="stylesheet", href="/assets/css/font-awesome.min.css")
+    body
+        div.container-fluid
+            div.col-md-3
+                div.panel.panel-default
+                    div.panel-heading
+                        i.fa.fa-calendar.fa-fw
+                        | &nbsp;Vergaderingen
+                    ul.list-group
+                        a.list-group-item(href="/")
+                            i.fa.fa-play.fa-fw
+                            | &nbsp;Starten
+                        a.list-group-item(href="/")
+                            i.fa.fa-compress.fa-fw
+                            | &nbsp;Meedoen
+
+                div.panel.panel-default
+                    div.panel-heading
+                        i.fa.fa-search.fa-fw
+                        | &nbsp;Zoeken
+                    ul.list-group
+                        a.list-group-item(href="/")
+                            i.fa.fa-play.fa-fw
+                            | &nbsp;Starten
+                        a.list-group-item(href="/")
+                            i.fa.fa-compress.fa-fw
+                            | &nbsp;Meedoen
+
+                div.panel.panel-default
+                    div.panel-heading
+                        i.fa.fa-cog.fa-fw
+                        | &nbsp;Instellingen
+                    ul.list-group
+                        a.list-group-item(href="/")
+                            i.fa.fa-wrench.fa-fw
+                            | &nbsp;Agendapunten
+                        a.list-group-item(href="/")
+                            i.fa.fa-users.fa-fw
+                            | &nbsp;Gebruikers
+
+
+                a.btn.btn-default(href="/sign-out")
+                    i.fa.fa-power-off
+                    | &nbsp;Uitloggen
+
+            div.col-md-9
+                block content
+        include footer

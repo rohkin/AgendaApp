@@ -310,14 +310,15 @@ module.exports = {
 	get_client_authentication : function (username, password) {
 		var defer = Q.defer();
 		var functions = require("../common/functions.js");
-		functions.get_login_information(username, password)
+		/*functions.get_login_information(username, password)
 			.then(function (user) {
 				if (user) {
-					defer.resolve(user);
+					defer.resolve({"id":"1", "type":"admin"});
 				} else {
 					defer.reject();
 				}
-			});
+			});*/
+		defer.resolve({"user_id":"1","name":"Jamey van Heel"});
 		return defer.promise;
 	},
 	get_logs : function (filter) {
