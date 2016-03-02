@@ -1,0 +1,83 @@
+@font-face {
+	font-family: 'Ubuntu';
+	font-style: normal;
+	font-weight: 300;
+	src: local('Ubuntu Light'), local('Ubuntu-Light'), url('/assets/fonts/Ubuntu-Light.woff2') format('woff2'), url('/assets/fonts/Ubuntu-Light.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Ubuntu';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Ubuntu'), url('/assets/fonts/Ubuntu.woff2') format('woff2'), url('/assets/fonts/Ubuntu.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Ubuntu';
+	font-style: normal;
+	font-weight: 700;
+	src: local('Ubuntu Bold'), local('Ubuntu-Bold'), url('/assets/fonts/Ubuntu-Bold.woff2') format('woff2'), url('/assets/fonts/Ubuntu-Bold.woff') format('woff');
+}
+
+body {
+	-webkit-font-smoothing: antialiased;
+	/* Slightly bolder letters; for webkit-base browsers like Safari and Chrome
+	    (effect on Mac only) */
+	-webkit-font-smoothing: subpixel-antialiased;
+	/* Slightly lighter letters; for Firefox (effect on Mac only) */
+	-moz-osx-font-smoothing: grayscale;
+	/* Slightly bolder letters; for Firefox (effect on Mac only) */
+	-moz-osx-font-smoothing: auto;
+	-moz-font-feature-settings: "liga", "dlig", "kern", "onum";
+	-moz-font-feature-settings: "liga=1, dlig=1, kern=1, onum=1";
+	-ms-font-feature-settings: "liga", "dlig", "kern", "onum";
+	-o-font-feature-settings: "liga", "dlig", "kern", "onum";
+	-webkit-font-feature-settings: "liga", "dlig", "kern", "onum";
+	font-feature-settings: "liga", "dlig", "kern", "onus";
+	font-family: 'Ubuntu', Helvetica, Arial, sans-serif !important;
+}
+
+.footer {
+	border-top: 1px solid #e5e5e5;
+	color: #777777;
+	padding-top: 19px;
+}
+
+.inner_padding_30px {
+	padding: 30px;
+}
+
+.margin_top_20px {
+	margin-top: 20px;
+}
+
+.site_wrapper_body {
+	height: 100%;
+}
+
+.site_wrapper {
+	display: table;
+	width: 100%;
+	height: 100%;
+	min-height: 100%;
+}
+
+.site_wrapper_inner {
+	display: table-cell;
+	vertical-align: top;
+}
+
+.site_wrapper_container {
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.color_white {
+	color: white;
+}
+
+.text-overflow {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
