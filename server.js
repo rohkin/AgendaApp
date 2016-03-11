@@ -47,6 +47,7 @@ app.set("etag", "strong");
 app.set("jsonp callback name", "callback");
 // ROUTES FOR OUR API
 require(path.join(__dirname, "routes", "index.js"))(app, passport);
+require(path.join(__dirname, "routes", "settings.js"))(app, passport);
 
 // Handle 404
 app.all('*', function (request, response) {

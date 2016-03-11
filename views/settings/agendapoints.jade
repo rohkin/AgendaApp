@@ -1,0 +1,23 @@
+extends ../includes/header
+block content
+	div.panel.panel-default
+		div.panel-heading
+			i.fa.fa-wrench
+			| &nbsp;Agendapunten instellingen
+
+		div.panel-body
+			div.col-md-3
+				ul.list-group#sortable
+					li.list-group-item Presentie
+						div.well.well-sm.collapse HEUL VEUL TEKST HEUL VEUL TEKST HEUL VEUL TEKST HEUL VEUL TEKST
+					li.list-group-item Voorbespreking
+					li.list-group-item Agendapunten
+					li.list-group-item Actiepunten
+					li.list-group-item Leerlingen afzeiken
+					li.list-group-item Drank
+			div.col-md-3
+				div.form-group
+					input.form-control(placeholder="Standaard Agendapunt")
+				button.btn.btn-primary.pull-right(type="button")
+					i.fa.fa-plus
+	- var jsfiles = ["jquery-ui.min.js","settings/agendapoints.js"];

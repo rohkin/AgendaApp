@@ -2,7 +2,7 @@
   "main": "server.js",
   "name": "application-name",
   "private": "true",
-  "version": "1.0.3",
+  "version": "0.0.1",
   "dependencies": {
     "azure-storage": "^0.8.0",
     "body-parser": "^1.14.2",
@@ -12,12 +12,11 @@
     "jade": "^1.11.0",
     "lodash": "^3.10.1",
     "multiparty": "^4.1.2",
+    "mysql": "^2.10.2",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "q": "^1.4.1",
     "serve-favicon": "^2.3.0",
-    "serve-static": "^1.10.0",
-    "tedious": "^1.13.2",
-    "tedious-connection-pool": "^0.3.9"
+    "serve-static": "^1.10.0"
   }
 }

@@ -18,13 +18,13 @@ module.exports = function (passport) {
 		function (request, username, password, done) {
 			functions.get_client_authentication(request.body.username, request.body.password)
 				.then(function (user) {
-					if (user) {
+					if (user.length > 0) {
 						done(null, user);
 					} else {
-						done(null, user, {"message": "Unauthorized access."});
+						done(null, null, {"message": "Unauthorized access."});
 					}
 				}).fail(function (user) {
-					done(null, user, {"message": "Unauthorized access."});
+					done(null, null, {"message": "Unauthorized access."});
 				});
 		}
 	));

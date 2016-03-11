@@ -1,77 +1,81 @@
 extends includes/header
 block content
-    div.panel.panel-default
-        div.panel-heading
-            i.fa.fa-search.fa-fw
-            | &nbsp;Search
-        div.panel-body
-                form
-                    div.row
-                        div.col-md-6
-                            div.form-group
-                                input.form-control.input-sm#generic(placeholder="zoektermen..")
-                        div.col-md-3
-                            div.form-group
-                                input.form-control.input-sm#date(placeholder="dd-mm-yyyy")
-                    div.row
-                        div.col-md-3
-                            div.form-group
-                                select.form-control.input-sm#type
-                                    option ---
-                        div.col-md-3
-                            div.form-group
-                                select.form-control.input-sm#user
-                                    option ---
-                        div.col-md-3
-                            div.form-group
-                                a.btn.btn-primary.btn-sm
-                                    i.fa.fa-search
-                                    | &nbsp;Zoeken
-        div.panel-heading
-            i.fa.fa-inbox.fa-fw
-            | &nbsp;Resultaten
+	div.panel.panel-default
+		div.panel-heading
+			i.fa.fa-search.fa-fw
+			| &nbsp;Search
+		div.panel-body
+			form
+				div.row
+					div.col-md-6
+						div.form-group
+							input.form-control.input-sm#generic(placeholder="zoektermen..")
+					div.col-md-3
+						div.form-group
+							input.form-control.input-sm#date(placeholder="dd-mm-yyyy")
+				div.row
+					div.col-md-3
+						div.form-group
+							select.form-control.input-sm#type
+								option ---
+					div.col-md-3
+						div.form-group
+							select.form-control.input-sm#user
+								option ---
+					div.col-md-3
+						div.form-group
+							a.btn.btn-primary.btn-sm
+								i.fa.fa-search
+								| &nbsp;Zoeken
+		div.panel-heading
+			i.fa.fa-inbox.fa-fw
+			| &nbsp;Resultaten
 
 
-        table.table.table-hover
-            thead
-                tr
-                    th Titel
-                    th Omschrijving
-                    th Datum
-                    th Gebruiker
-                    th
+		table.table.table-hover
+			thead
+				tr
+					th Type
+					th Titel
+					th Omschrijving
+					th Datum
+					th Gebruiker
+					th
 
-            tbody
-                tr
-                    td Westerveld onstlag
-                    td Hoe Westerveld vast te houden tijdens haar HULKRAGE Hoe Westerveld vast te houden tijdens haar HULKRAGEHoe Westerveld vast te houden tijdens haar HULKRAGEHoe Westerveld vast te houden tijdens haar HULKRAGEHoe Westerveld vast te houden tijdens haar HULKRAGE
-                    td 15-06-1990
-                    td Menno But
-                    td
-                        a.btn.btn-warning.btn-xs(href="/")
-                            i.fa.fa-eye.fa-fw
-                tr
-                    td Westerveld onstlag
-                    td Hoe Westerveld vast te houden tijdens haar HULKRAGE
-                    td 15-06-1990
-                    td Menno But
-                    td
-                        a.btn.btn-warning.btn-xs(href="/")
-                            i.fa.fa-eye.fa-fw
-                tr
-                    td Westerveld onstlag
-                    td Hoe Westerveld vast te houden tijdens haar HULKRAGE
-                    td 15-06-1990
-                    td Menno But
-                    td
-                        a.btn.btn-warning.btn-xs(href="/")
-                            i.fa.fa-eye.fa-fw
-        div.panel-footer
-            a.btn.btn-default(disabled)
-                i.fa.fa-arrow-circle-left.fa-fw
-                | &nbsp;Vorige
-            a.btn.btn-default.pull-right
-                i.fa.fa-arrow-circle-right.fa-fw
-                | &nbsp;Volgende
+			tbody
+				tr
+					td Agendapunt
+					td Westerveld onstlag
+					td Hoe Westerveld vast te houden tijdens haar HULKRAGE Hoe Westerveld vast te houden tijdens haar HULKRAGEHoe Westerveld vast te houden tijdens haar HULKRAGEHoe Westerveld vast te houden tijdens haar HULKRAGEHoe Westerveld vast te houden tijdens haar HULKRAGE
+					td 15-06-1990
+					td Menno But
+					td
+						a.btn.btn-warning.btn-xs(href="/")
+							i.fa.fa-eye.fa-fw
+				tr
+					td Notule
+					td Westerveld onstlag
+					td Hoe Westerveld vast te houden tijdens haar HULKRAGE
+					td 15-06-1990
+					td Menno But
+					td
+						a.btn.btn-warning.btn-xs(href="/")
+							i.fa.fa-eye.fa-fw
+				tr
+					td Actiepunt
+					td Westerveld onstlag
+					td Hoe Westerveld vast te houden tijdens haar HULKRAGE
+					td 15-06-1990
+					td Menno But
+					td
+						a.btn.btn-warning.btn-xs(href="/")
+							i.fa.fa-eye.fa-fw
+		div.panel-footer
+			a.btn.btn-default(disabled)
+				i.fa.fa-arrow-circle-left.fa-fw
+				| &nbsp;Vorige
+			a.btn.btn-default.pull-right
+				i.fa.fa-arrow-circle-right.fa-fw
+				| &nbsp;Volgende
 
-    - var jsfiles = ["index/index.js"];
+	- var jsfiles = ["index/index.js"];
