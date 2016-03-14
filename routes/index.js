@@ -1,7 +1,6 @@
 var functions = require("../common/functions.js");
 var multiparty = require('multiparty');
 var path = require("path");
-var Q = require("q");
 var util = require("util");
 var _ = require("lodash");
 module.exports = function (app, passport) {
@@ -28,10 +27,9 @@ module.exports = function (app, passport) {
 			request.logout();
 			response.redirect('/sign-in');
 		});
-	/*app.route("/dashboard")
+	app.route("/dashboard")
 		.get(function (request, response) {
-			functions.
 			response.render("dashboard");
-		});*/
+		});
 }
 

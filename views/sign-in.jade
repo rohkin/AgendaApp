@@ -11,6 +11,7 @@ html(lang="nl")
 	body.margin_top_20px
 		div.container
 			div.row(style="margin-top: 5px")
+				h1.col-md-6.col-md-offset-3.col-xs-10.col-xs-offset-1.text-center Agenda App
 				div.well.col-md-6.col-md-offset-3.col-xs-10.col-xs-offset-1
 					if message.length !== 0
 						div.alert.alert-danger
@@ -18,11 +19,11 @@ html(lang="nl")
 							| &#160;#{message}
 					form.form-horizontal(method="post")
 						div.form-group
-							label.control-label.col-xs-4 Username
+							label.control-label.col-xs-4 Gebruikersnaam
 							div.col-xs-8
 								input.form-control(id="username", name="username", required)
 						div.form-group
-							label.control-label.col-xs-4 Password
+							label.control-label.col-xs-4 Wachtwoord
 							div.col-xs-8
 								input.form-control(id="password", name="password", required, type="password")
 						div.form-group

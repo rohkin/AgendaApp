@@ -21,10 +21,10 @@ module.exports = function (passport) {
 					if (user.length > 0) {
 						done(null, user);
 					} else {
-						done(null, null, {"message": "Unauthorized access."});
+						done(null, null, {"message": "Ongeautoriseerde Toegang."});
 					}
 				}).fail(function (user) {
-					done(null, null, {"message": "Unauthorized access."});
+					done(null, null, {"message": "Ongeautoriseerde Toegang."});
 				});
 		}
 	));
