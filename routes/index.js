@@ -27,9 +27,5 @@ module.exports = function (app, passport) {
 			request.logout();
 			response.redirect('/sign-in');
 		});
-	app.route("/dashboard")
-		.get(function (request, response) {
-			response.render("dashboard");
-		});
 }
 

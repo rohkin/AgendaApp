@@ -81,3 +81,10 @@ body {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+
+#active_actionpoints, #inactive_actionpoints {
+	background-color:gray;
+	padding:5px;
+	border-radius:4px;
+	min-height:52px;
+}

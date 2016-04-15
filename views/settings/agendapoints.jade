@@ -6,18 +6,26 @@ block content
 			| &nbsp;Agendapunten instellingen
 
 		div.panel-body
-			div.col-md-3
-				ul.list-group#sortable
-					li.list-group-item Presentie
-						div.well.well-sm.collapse HEUL VEUL TEKST HEUL VEUL TEKST HEUL VEUL TEKST HEUL VEUL TEKST
-					li.list-group-item Voorbespreking
-					li.list-group-item Agendapunten
-					li.list-group-item Actiepunten
-					li.list-group-item Leerlingen afzeiken
-					li.list-group-item Drank
-			div.col-md-3
-				div.form-group
-					input.form-control(placeholder="Standaard Agendapunt")
-				button.btn.btn-primary.pull-right(type="button")
-					i.fa.fa-plus
+			div.col-md-4
+				h4 Actief
+				ul.list-group#active_agendapoints
+			div.col-md-4
+				h4 Inactief
+				ul.list-group#inactive_agendapoints
+
+			div.col-md-4
+				h4 Nieuw Agendapunt toevoegen
+				form#add_agendapoint_form
+					div.form-group
+						input.form-control(name="title", placeholder="Titel", required)
+					div.form-group
+						input.form-control(name="description", placeholder="Omschrijving", required)
+					button.btn.btn-primary.pull-right#add_delete_button(type="submit")
+						i.fa.fa-plus
+
+	script(type="text/template")#template_agendapoint
+		li.list-group-item(data-id="{{Id}}", data-active="{{Active}}") {{Title}}
+			div.well.well-sm.collapse(style="margin-top:15px") {{Description}}
+
+
 	- var jsfiles = ["jquery-ui.min.js","settings/agendapoints.js"];

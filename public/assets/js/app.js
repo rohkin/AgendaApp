@@ -90,7 +90,7 @@ $(document).ready(function () {
 
 	set_datetime_formats();
 
-    $(".list-group-item").click(function () {
-        $(this).children().first().collapse("toggle");
-    });
+	$(".list-group-item").click(function () {
+		$(this).children().first().collapse("toggle");
+	});
 });
