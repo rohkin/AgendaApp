@@ -89,8 +89,4 @@ $(document).ready(function () {
 	_.extend(window.global, {"DateTimeFormat": moment.localeData()._longDateFormat});
 
 	set_datetime_formats();
-
-	$(".list-group-item").click(function () {
-		$(this).children().first().collapse("toggle");
-	});
 });

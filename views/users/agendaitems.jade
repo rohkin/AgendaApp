@@ -1,2 +1,24 @@
 extends ../includes/header
 block content
+	div.col-md-4
+		div.panel.panel-danger
+			div.panel-heading
+				i.fa.fa-genderless
+				| &nbsp;{{Title}}
+			div.panel-body {{Description}}
+			hr
+			ul.list-group
+				li.list-group-item Actiepunten
+				li.list-group-item.list-group-item-success.clearfix {{ActionTitle}}
+					span.pull-right
+						button.btn.btn-default.btn-xs
+							i.fa.fa-times-circle
+				li.list-group-item.list-group-item-danger.clearfix {{ActionTitle}}
+					span.pull-right
+						button.btn.btn-default.btn-xs
+							i.fa.fa-check-circle
+			div.panel-footer.clearfix
+				button.btn.btn-default.pull-right
+					i.fa.fa-check-circle
+					| &nbsp;Afboeken
+
