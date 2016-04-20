@@ -39,6 +39,12 @@ module.exports = {
 		};
 
 		pool.getConnection(function (error, connection) {
+			if(error) {
+				console.log(error);
+				defer.reject(error);
+				return defer.promise;
+
+			}
 			connection.query(options, function (error, results) {
 				if (error) {
 					defer.reject(error);

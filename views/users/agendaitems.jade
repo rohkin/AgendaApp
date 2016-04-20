@@ -1,5 +1,7 @@
 extends ../includes/header
 block content
+	div.col-md-12
+		
 	div.col-md-4
 		div.panel.panel-danger
 			div.panel-heading
@@ -9,16 +11,12 @@ block content
 			hr
 			ul.list-group
 				li.list-group-item Actiepunten
-				li.list-group-item.list-group-item-success.clearfix {{ActionTitle}}
-					span.pull-right
-						button.btn.btn-default.btn-xs
-							i.fa.fa-times-circle
 				li.list-group-item.list-group-item-danger.clearfix {{ActionTitle}}
 					span.pull-right
-						button.btn.btn-default.btn-xs
+						button.btn.btn-default.btn-xs(data-id="{{ActionId}}", data-resolved="{[Resolved}}")
 							i.fa.fa-check-circle
 			div.panel-footer.clearfix
-				button.btn.btn-default.pull-right
+				button.btn.btn-default.pull-right(data-id="{{Id}}")
 					i.fa.fa-check-circle
 					| &nbsp;Afboeken
 
