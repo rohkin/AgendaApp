@@ -1,27 +1,25 @@
 extends ../includes/header
 block content
-    div.col-md-4
-        div.panel.panel-default
-            div.panel-heading
-                i.fa.fa-genderless.fa-fw
-                | &nbsp;Agendapunten
-            ul.list-group
-                li.list-group-item.text-overflow Agendapunt Titel Die Soms Nog Wel Een Erg Lang Kan Blijken
-                    div.collapse
-                        p HEUL VEUL TEKST HEUL VEUL TEKST HEUL VEUL TEKST HEUL VEUL TEKST
-                        a.btn.btn-default
-                            i.fa.fa-calendar.fa-fw
-                li.list-group-item Agenda Titel
-                    p.collapse HEUL VEUL TEKST HEUL VEUL TEKST HEUL VEUL TEKST HEUL VEUL TEKST
-                li.list-group-item Agenda Titel
-                    p.collapse HEUL VEUL TEKST HEUL VEUL TEKST HEUL VEUL TEKST HEUL VEUL TEKST
-    div.col-md-4
-        div.panel.panel-default
-            div.panel-heading
-                i.fa.fa-inbox.fa-fw
-                | &nbsp;Actiepunten
-    div.col-md-4
-        div.panel.panel-default
-            div.panel-heading
-                i.fa.fa-inbox.fa-fw
-                | &nbsp;Notulen
+	div#test
+
+	script(type="html/template")#agendaitem_template
+		div.col-md-4
+			div.panel.panel-primary
+				div.panel-heading
+					i.fa.fa-genderless
+					| &nbsp;{{AgendaTitle}}
+				div.panel-body {{AgendaDescription}}
+				hr
+				ul.list-group(data-id="{{AgendaId}}")
+					li.list-group-item Actiepunten
+				div.panel-footer.clearfix
+					button.btn.btn-default.pull-right(data-id="{{AgendaId}}")
+						i.fa.fa-check-circle
+						| &nbsp;Afboeken
+
+	script(type="html/template")#actionpoint_template
+		li.list-group-item.list-group-item-danger.clearfix {{ActionTitle}}
+			span.pull-right
+				button.btn.btn-default.btn-xs(data-id="{{ActionId}}", data-resolved="{[ActionResolved}}")
+					i.fa.fa-check-circle
+	- var jsfiles = ["users/dashboard.js"];

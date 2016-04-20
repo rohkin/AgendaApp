@@ -31,7 +31,62 @@ module.exports = {
 
 		return defer.promise;
 	},
-	get_standard_agendapoints: function () {
+	get_agendaitems: function (user_id) {
+		var defer = Q.defer();
+
+		var options = {
+			"sql": "SELECT ai.* FROM agendaitems AS ai " +
+			"LEFT JOIN actionpoints AS ap " +
+			"ON ai.item_id = ap.item_id " +
+			"LEFT JOIN users_points AS up " +
+			"ON up.point_id = ap.point_id " +
+			"WHERE up.user_id = ? " +
+			"AND ap.resolved = 0 " +
+			"GROUP BY ai.item_id",
+			"values": [user_id]
+		};
+
+		pool.getConnection(function (error, connection) {
+			connection.query(options, function (error, results) {
+				if (error) {
+					defer.reject(error);
+				} else {
+					defer.resolve(results);
+				}
+			});
+			connection.release();
+		});
+
+		return defer.promise;
+	},
+	get_actionpoints: function (item_id,user_id) {
+		var defer = Q.defer();
+
+		var options = {
+			"sql": "SELECT ap.* FROM agendaitems AS ai " +
+			"LEFT JOIN actionpoints AS ap " +
+			"ON ai.item_id = ap.item_id " +
+			"LEFT JOIN users_points AS up " +
+			"ON up.point_id = ap.point_id " +
+			"WHERE ai.item_id = ? " +
+			"AND up.user_id = ? ",
+			"values": [item_id, user_id]
+		};
+
+		pool.getConnection(function (error, connection) {
+			connection.query(options, function (error, results) {
+				if (error) {
+					defer.reject(error);
+				} else {
+					defer.resolve(results);
+				}
+			});
+			connection.release();
+		});
+
+		return defer.promise;
+	},
+	get_standard_agendaitems: function () {
 		var defer = Q.defer();
 
 		var options = {
@@ -39,7 +94,7 @@ module.exports = {
 		};
 
 		pool.getConnection(function (error, connection) {
-			if(error) {
+			if (error) {
 				console.log(error);
 				defer.reject(error);
 				return defer.promise;
@@ -57,7 +112,7 @@ module.exports = {
 
 		return defer.promise;
 	},
-	remove_agendapoint: function (id) {
+	remove_agendaitem: function (id) {
 		var defer = Q.defer();
 
 		var options = {
@@ -79,7 +134,7 @@ module.exports = {
 
 		return defer.promise;
 	},
-	save_standard_agendapoints: function (data) {
+	save_standard_agendaitems: function (data) {
 		var defer = Q.defer();
 
 		var resolve = null;

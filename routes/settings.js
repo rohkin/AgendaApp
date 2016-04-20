@@ -14,7 +14,7 @@ module.exports = function (app, passport) {
 			response.render("settings/agendapoints");
 		})
 		.post(is_logged_in, function (request, response) {
-			functions.save_standard_agendapoints(JSON.parse(request.body.data))
+			functions.save_standard_agendaitems(JSON.parse(request.body.data))
 				.then(function (result) {
 					response.json(result);
 				}).fail(function (error) {
@@ -23,7 +23,7 @@ module.exports = function (app, passport) {
 		});
 	app.route("/settings/getagendapoints")
 		.post(is_logged_in, function (request, response) {
-			functions.get_standard_agendapoints()
+			functions.get_standard_agendaitems()
 				.then(function (result) {
 					response.json(result);
 				}).fail(function (error) {
@@ -32,7 +32,7 @@ module.exports = function (app, passport) {
 		});
 	app.route("/settings/removeagendapoint")
 		.post(is_logged_in, function (request, response) {
-			functions.remove_agendapoint(request.body.data)
+			functions.remove_agendaitem(request.body.data)
 				.then(function (result) {
 					response.json(result);
 				}).fail(function (error) {

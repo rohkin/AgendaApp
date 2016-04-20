@@ -52,12 +52,12 @@
 	};
 
 	var add_button = function () {
-		$("#add_delete_button").removeClass("btn-danger col-md-12").addClass("btn-primary pull-right")
+		$("#add_delete_button").removeClass("btn-danger col-md-12 btn-lg").addClass("btn-primary pull-right")
 			.children().first().removeClass("fa-trash").addClass("fa-plus");
 	};
 
 	var delete_button = function () {
-		$("#add_delete_button").removeClass("btn-primary pull-right").addClass("btn-danger col-md-12")
+		$("#add_delete_button").removeClass("btn-primary pull-right").addClass("btn-danger col-md-12 btn-lg")
 			.children().first().removeClass("fa-plus").addClass("fa-trash");
 	};
 
