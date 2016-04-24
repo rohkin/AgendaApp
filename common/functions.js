@@ -59,7 +59,7 @@ module.exports = {
 
 		return defer.promise;
 	},
-	get_actionpoints: function (item_id,user_id) {
+	get_actionpoints: function (item_id, user_id) {
 		var defer = Q.defer();
 
 		var options = {
@@ -108,6 +108,27 @@ module.exports = {
 				}
 			});
 			connection.release();
+		});
+
+		return defer.promise;
+	},
+	get_user: function (id) {
+		var defer = Q.defer();
+
+		var options = {
+			"sql": "SELECT user_id, first_name, middle_name, last_name FROM `users` WHERE `user_id` = ?",
+			"values": [id]
+		};
+
+		pool.getConnection(function (error, connection) {
+			connection.query(options, function (error, results) {
+				if (error) {
+					defer.reject(error);
+				} else {
+					defer.resolve(results);
+				}
+				connection.release();
+			});
 		});
 
 		return defer.promise;
@@ -179,6 +200,48 @@ module.exports = {
 		if (!defer.promise) {
 			defer.resolve(resolve);
 		}
+
+		return defer.promise;
+	},
+	save_update_user: function (data) {
+		var defer = Q.defer();
+		var user = data || [];
+
+		if (user.password2 !== 'undefined') {
+			if (user.password !== user.password2) {
+				user.password = null;
+			}
+		}
+
+		var parameters = [];
+		_.forEach([1, 2], function () {
+			parameters.push(user.user_id || null);
+			parameters.push(user.username_ || null);
+			parameters.push(user.password || null);
+			parameters.push(user.first_name || null);
+			parameters.push(user.middle_name || null);
+			parameters.push(user.last_name || null);
+		});
+
+		var options = {
+			"sql": "INSERT INTO `users` (user_id, username, password, first_name, middle_name, last_name)" +
+			" VALUES (?,?,?,?,?,?)" +
+			" ON DUPLICATE KEY" +
+			" UPDATE user_id=?, username=COALESCE(?, username), password=COALESCE(?, password)," +
+			" first_name=COALESCE(?, first_name), middle_name=?, last_name=COALESCE(?, last_name)",
+			"values": parameters
+		};
+
+		pool.getConnection(function (error, connection) {
+			connection.query(options, function (error, results) {
+				if (error) {
+					defer.reject(error);
+				} else {
+					defer.resolve(results);
+				}
+				connection.release();
+			});
+		});
 
 		return defer.promise;
 	}

@@ -1,30 +1,35 @@
 extends ../includes/header
 block content
-		//	div.col-md-6
-			div.panel.panel-default
-				div.panel-heading
-					i.fa.fa-cog
-					| &nbsp;Instellingen
-		div.col-md-6
-			div.panel.panel-default
-				div.panel-heading
-					i.fa.fa-envelope
-					| &nbsp;Gegevens
-				div.panel-body
-					form
-						div.form-group
-							label Naam
-							div.row
-								div.col-md-4
-									input.form-control.input-sm#first_name(placeholder="John")
-								div.col-md-3
-									input.form-control.input-sm#middle_name(placeholder="of")
-								div.col-md-5
-									input.form-control.input-sm#last_name(placeholder="Doe")
-						div.form-group
-							label(for="username") Gebruikersnaam
-							input.form-control.input-sm#username(placeholder="username")
-						div.form-group
-							label(for="password") Wachtwoord
-							input.form-control.input-sm#password(placeholder="password")
+	//	div.col-md-6
+		div.panel.panel-default
+			div.panel-heading
+				i.fa.fa-cog
+				| &nbsp;Instellingen
+	div.col-md-6
+		div.panel.panel-default
+			div.panel-heading
+				i.fa.fa-envelope
+				| &nbsp;Gegevens
+			div.panel-body
+				form(method="POST")
+					div.form-group
+						input#user_id(type="hidden", name="user_id")
+						label Naam
+						div.row
+							div.col-md-4
+								input.form-control.input-sm#first_name(name="first_name", placeholder="John")
+							div.col-md-3
+								input.form-control.input-sm#middle_name(name="middle_name", placeholder="of")
+							div.col-md-5
+								input.form-control.input-sm#last_name(name="last_name", placeholder="Doe")
+					div.form-group
+						label(for="password") Wachtwoord
+						input.form-control.input-sm#password(name="password", placeholder="password", type="password")
+					div.form-group
+						label(for="password2") Wachtwoord herhalen
+						input.form-control.input-sm#password2(name="password2", placeholder="password", type="password")
+					button.btn.btn-primary.pull-right#save(type="submit")
+						i.fa.fa-save
+						| &nbsp;Opslaan
+	- var jsfiles = ["users/settings.js"];
 

@@ -26,7 +26,7 @@
 			template = template.replace(/\{\{ActionId\}\}/g, point.point_id);
 			$("ul[data-id={0}]".format(point.item_id)).append(template);
 		});
-	}
+	};
 
 	$(document).ready(function () {
 		$.post("/users/get_agendaitems", template_agendaitems);

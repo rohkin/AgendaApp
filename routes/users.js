@@ -36,5 +36,22 @@ module.exports = function (app, passport) {
 	app.route("/users/settings")
 		.get(is_logged_in, function (request, response) {
 			response.render("users/settings");
+		})
+		.post(is_logged_in, function (request, response) {
+			functions.save_update_user(request.body)
+				.then(function (result) {
+					response.json(result);
+				}).fail(function (error) {
+				response.status(500).send(error).end();
+			});
+		});
+	app.route("/users/get_user")
+		.post(is_logged_in, function (request, response) {
+			functions.get_user(_.first(request.user).user_id)
+				.then(function (result) {
+					response.json(result);
+				}).fail(function (error) {
+				response.status(500).send(error).end();
+			});
 		});
 };
