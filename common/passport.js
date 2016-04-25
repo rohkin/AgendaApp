@@ -31,8 +31,8 @@ module.exports = function (passport) {
 };
 // route middleware to make sure a user is logged in
 global.is_logged_in = function (req, res, next) {
-	if (req.isAuthenticated()) {
+	//if (req.isAuthenticated()) {
 		return next();
-	}
+	//}
 	res.redirect("/sign-in");
 }

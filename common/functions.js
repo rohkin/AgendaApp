@@ -86,6 +86,26 @@ module.exports = {
 
 		return defer.promise;
 	},
+	get_active_standard_agendaitems: function () {
+		var defer = Q.defer();
+
+		var options = {
+			"sql": "SELECT * FROM agendaitems WHERE `default` = 1 AND `active` = 1 ORDER BY `position` ASC"
+		};
+
+		pool.getConnection(function (error, connection) {
+			connection.query(options, function (error, results) {
+				if (error) {
+					defer.reject(error);
+				} else {
+					defer.resolve(results);
+				}
+			});
+			connection.release();
+		});
+
+		return defer.promise;
+	},
 	get_standard_agendaitems: function () {
 		var defer = Q.defer();
 
@@ -94,12 +114,6 @@ module.exports = {
 		};
 
 		pool.getConnection(function (error, connection) {
-			if (error) {
-				console.log(error);
-				defer.reject(error);
-				return defer.promise;
-
-			}
 			connection.query(options, function (error, results) {
 				if (error) {
 					defer.reject(error);
@@ -117,6 +131,30 @@ module.exports = {
 
 		var options = {
 			"sql": "SELECT user_id, first_name, middle_name, last_name FROM `users` WHERE `user_id` = ?",
+			"values": [id]
+		};
+
+		pool.getConnection(function (error, connection) {
+			connection.query(options, function (error, results) {
+				if (error) {
+					defer.reject(error);
+				} else {
+					defer.resolve(results);
+				}
+				connection.release();
+			});
+		});
+
+		return defer.promise;
+	},
+	get_agendapoints_by_meeting_id: function (id) {
+		var defer = Q.defer();
+
+		var options = {
+			"sql": "SELECT ai.* FROM meetings AS m" +
+			" INNER JOIN agendaitems AS ai" +
+			" ON m.meeting_id = ai.meeting_id" +
+			" WHERE m.meeting_id = ?",
 			"values": [id]
 		};
 
@@ -151,7 +189,6 @@ module.exports = {
 				connection.release();
 			});
 		});
-
 
 		return defer.promise;
 	},
