@@ -2,20 +2,22 @@ extends ../includes/header
 block content
         div#page_id(data-id=id)
 
-        div.col-md-4
-                div.panel.panel-primary
-                        div.panel-heading
-                                i.fa.fa-genderless
-                                | &nbsp;{{AgendaTitle}}
-                        div.panel-body.panel-collapse {{AgendaDescription}}
-                        hr
-                        ul.list-group.panel-collapse(data-id="{{AgendaId}}")
-                                li.list-group-item Actiepunten
-                        div.panel-footer.clearfix.panel-collapse
-                                button.btn.btn-default.pull-right(data-id="{{AgendaId}}")
-                                        i.fa.fa-check-circle
-                                        | &nbsp;Afboeken
+        div.page-header
+                h1= meeting.date
 
-
+        script(type="html/template")#agendaitem_template
+                div.col-md-4
+                        div.panel.panel-primary
+                                div.panel-heading
+                                        i.fa.fa-genderless
+                                        | &nbsp;{{AgendaTitle}}
+                                div.panel-body.panel-collapse {{AgendaDescription}}
+                                hr
+                                ul.list-group.panel-collapse(data-id="{{AgendaId}}")
+                                        li.list-group-item Actiepunten
+                                div.panel-footer.clearfix.panel-collapse
+                                        button.btn.btn-default.pull-right(data-id="{{AgendaId}}")
+                                                i.fa.fa-check-circle
+                                                | &nbsp;Afboeken
 
         - var jsfiles = ["meetings/index.js"];

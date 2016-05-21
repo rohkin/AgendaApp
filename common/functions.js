@@ -7,6 +7,24 @@ var mysql = require('mysql')
 	, _ = require("lodash");
 
 module.exports = {
+	sql_query: function (options) {
+		pool.getConnection(function (error, connection) {
+			if(error) {
+				defer.reject(error);
+				return defer.promise;
+			}
+			connection.query(options, function (error, results) {
+				if (error) {
+					defer.reject(error);
+				} else {
+					defer.resolve(results);
+				}
+			});
+			connection.release();
+		});
+
+		return defer.promise;
+	},
 	get_client_authentication: function (username, password) {
 		var defer = Q.defer();
 
@@ -44,6 +62,51 @@ module.exports = {
 			"AND ap.resolved = 0 " +
 			"GROUP BY ai.item_id",
 			"values": [user_id]
+		};
+
+		pool.getConnection(function (error, connection) {
+			connection.query(options, function (error, results) {
+				if (error) {
+					defer.reject(error);
+				} else {
+					defer.resolve(results);
+				}
+			});
+			connection.release();
+		});
+
+		return defer.promise;
+	},
+	get_meeting: function (meeting_id) {
+		var defer = Q.defer();
+
+		var options = {
+			"sql": "SELECT * FROM meetings" +
+			" WHERE meeting_id = ?",
+			"values": [meeting_id]
+		};
+
+		pool.getConnection(function (error, connection) {
+			connection.query(options, function (error, results) {
+				if (error) {
+					defer.reject(error);
+				} else {
+					defer.resolve(results);
+				}
+			});
+			connection.release();
+		});
+
+		return defer.promise;
+	},
+	get_meeting_agendaitems: function (meeting_id) {
+		var defer = Q.defer();
+
+		var options = {
+			"sql": "SELECT * FROM agendaitems" +
+			" WHERE meeting_id = ?" +
+			" ORDER BY position ASC",
+			"values": [meeting_id]
 		};
 
 		pool.getConnection(function (error, connection) {
@@ -98,6 +161,7 @@ module.exports = {
 				if (error) {
 					defer.reject(error);
 				} else {
+					console.log(results);
 					defer.resolve(results);
 				}
 			});
@@ -122,6 +186,56 @@ module.exports = {
 				}
 			});
 			connection.release();
+		});
+
+		return defer.promise;
+	},
+	save_agendapoint: function (data, item_id, meeting_id, active, time) {
+		var defer = Q.defer();
+		var agendapoints = data || [];
+		var item_id = item_id || false;
+		var meeting_id = meeting_id || null;
+		var active = active || null;
+		var time = time || null;
+
+
+
+		var parameters = [];
+		_.forEach([1, 2], function () {
+			if(item_id === true){
+				parameters.push(null);
+			} else {
+				parameters.push(item_id || agendapoints.item_id || null);
+			}
+			parameters.push(agendapoints.attachment_id_ || null);
+			parameters.push(meeting_id || agendapoints.meeting_id || null);
+			parameters.push(active || agendapoints.active || null);
+			parameters.push(0);
+			parameters.push(agendapoints.description || null);
+			parameters.push(agendapoints.position || null);
+			parameters.push(time || agendapoints.time || null);
+			parameters.push(agendapoints.title || null);
+		});
+
+		var options = {
+			"sql": "INSERT INTO `agendaitems` (item_id, attachment_id, meeting_id, active, `default`, description, position, time, title)" +
+			" VALUES (?,?,?,?,?,?,?,?,?)" +
+			" ON DUPLICATE KEY" +
+			" UPDATE item_id=?, attachment_id=COALESCE(?, attachment_id), meeting_id=COALESCE(?, meeting_id)," +
+			" active=COALESCE(?, active), `default`=COALESCE(?, `default`), description=COALESCE(?, description)," +
+			" position=COALESCE(?, position), `time`=COALESCE(?, `time`), title=COALESCE(?, title)",
+			"values": parameters
+		};
+
+		pool.getConnection(function (error, connection) {
+			connection.query(options, function (error, results) {
+				if (error) {
+					defer.reject(error);
+				} else {
+					defer.resolve(results);
+				}
+				connection.release();
+			});
 		});
 
 		return defer.promise;
