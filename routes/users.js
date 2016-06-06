@@ -5,7 +5,6 @@ var Q = require("q");
 var util = require("util");
 var _ = require("lodash");
 
-/* GET users listing. */
 module.exports = function (app, passport) {
 	app.route("/users/dashboard")
 		.get(is_logged_in, function (request, response) {
@@ -17,7 +16,7 @@ module.exports = function (app, passport) {
 		});
 	app.route("/users/get_agendaitems")
 		.post(is_logged_in, function (request, response) {
-			functions.get_agendaitems(_.first(request.user).user_id)
+			functions.get_agendaitems(_.first(request.user).user_id, request.body)
 				.then(function (result) {
 					response.json(result);
 				}).fail(function (error) {
@@ -51,6 +50,16 @@ module.exports = function (app, passport) {
 				.then(function (result) {
 					response.json(result);
 				}).fail(function (error) {
+				response.status(500).send(error).end();
+			});
+		});
+	app.route("/users/resolve_actionpoint")
+		.post(is_logged_in, function (request, response) {
+			functions.resolve_actionpoint(request.body)
+				.then(function (result) {
+					response.json(result);
+				}).fail(function (error) {
+				console.log(error)
 				response.status(500).send(error).end();
 			});
 		});

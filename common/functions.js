@@ -49,8 +49,18 @@ module.exports = {
 
 		return defer.promise;
 	},
-	get_agendaitems: function (user_id) {
+	get_agendaitems: function (user_id, data) {
 		var defer = Q.defer();
+
+		var user = data.user || null;
+		var resolved = data.resolved || null;
+
+		var user_where = "AND up.user_id = ? ";
+		var resolved_where = "AND ap.resolved = 0 ";
+
+		if(user == 1) user_where = "";
+		if(resolved == 1) resolved_where = "AND ai.item_id NOT IN(SELECT item_id FROM actionpoints WHERE resolved = 0) ";
+		if(resolved == 2) resolved_where = "";
 
 		var options = {
 			"sql": "SELECT ai.* FROM agendaitems AS ai " +
@@ -58,8 +68,10 @@ module.exports = {
 			"ON ai.item_id = ap.item_id " +
 			"LEFT JOIN users_points AS up " +
 			"ON up.point_id = ap.point_id " +
-			"WHERE up.user_id = ? " +
-			"AND ap.resolved = 0 " +
+			"WHERE 1=1 " +
+			user_where +
+			resolved_where +
+			"AND `ai`.`default` = 0 " +
 			"GROUP BY ai.item_id",
 			"values": [user_id]
 		};
@@ -291,6 +303,31 @@ module.exports = {
 		var options = {
 			"sql": "DELETE FROM `agendaitems` WHERE `item_id` = ?",
 			"values": [id]
+		};
+
+		pool.getConnection(function (error, connection) {
+			connection.query(options, function (error, results) {
+				if (error) {
+					defer.reject(error);
+				} else {
+					defer.resolve(results);
+				}
+				connection.release();
+			});
+		});
+
+		return defer.promise;
+	},
+	resolve_actionpoint: function (data) {
+		var defer = Q.defer();
+
+		var parameters = [];
+		parameters.push(data.resolved || 0);
+		parameters.push(data.id || null);
+
+		var options = {
+			"sql": "UPDATE `actionpoints` SET `resolved` = ? WHERE `point_id` = ?",
+			"values": parameters
 		};
 
 		pool.getConnection(function (error, connection) {

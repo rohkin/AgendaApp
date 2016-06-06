@@ -1,6 +1,22 @@
 extends ../includes/header
 block content
-	div#test
+	div.panel.panel-default
+		div.panel-heading
+			i.fa.fa-desktop
+			| &nbsp;Dashboard
+		div.panel-body
+			div.col-md-3
+				select.form-control(name="resolved")
+					option(value="0") openstaand
+					option(value="1") afgehandeld
+					option(value="2") alles
+			div.col-md-3
+				select.form-control(name="user")
+					option(value="0") eigen
+					option(value="1") iedereen
+		hr(style="margin-top:0")
+		div.panel-body
+			div#test
 
 	script(type="html/template")#agendaitem_template
 		div.col-md-4
@@ -12,14 +28,11 @@ block content
 				hr
 				ul.list-group(data-id="{{AgendaId}}")
 					li.list-group-item Actiepunten
-				div.panel-footer.clearfix
-					button.btn.btn-default.pull-right(data-id="{{AgendaId}}")
-						i.fa.fa-check-circle
-						| &nbsp;Afboeken
+				div.panel-body
 
 	script(type="html/template")#actionpoint_template
-		li.list-group-item.list-group-item-danger.clearfix {{ActionTitle}}
+		li.list-group-item.clearfix.actionpoint {{ActionTitle}}
 			span.pull-right
-				button.btn.btn-default.btn-xs(data-id="{{ActionId}}", data-resolved="{[ActionResolved}}")
-					i.fa.fa-check-circle
+				button.btn.btn-default.btn-xs(data-id="{{ActionId}}", data-resolved="{{ActionResolved}}")
+					i.fa
 	- var jsfiles = ["users/dashboard.js"];

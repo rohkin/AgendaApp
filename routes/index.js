@@ -6,7 +6,7 @@ var _ = require("lodash");
 module.exports = function (app, passport) {
 	app.route("/")
 		.get(is_logged_in, function (request, response) {
-			response.render("index");
+			response.render("users/dashboard");
 		});
 	app.route('/sign-in')
 		.get(function (request, response) {
@@ -26,6 +26,10 @@ module.exports = function (app, passport) {
 			request.session.destroy();
 			request.logout();
 			response.redirect('/sign-in');
+		});
+	app.route("/search")
+		.get(is_logged_in, function (request, response) {
+			response.render("search");
 		});
 }
 
