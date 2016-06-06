@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.14
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 21, 2016 at 01:20 PM
--- Server version: 5.6.26
--- PHP Version: 5.6.12
+-- Generation Time: Jun 06, 2016 at 02:15 PM
+-- Server version: 10.1.9-MariaDB
+-- PHP Version: 5.6.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `actionpoints`
 --
 
-CREATE TABLE IF NOT EXISTS `actionpoints` (
+CREATE TABLE `actionpoints` (
   `point_id` int(11) NOT NULL,
   `item_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
@@ -34,19 +34,19 @@ CREATE TABLE IF NOT EXISTS `actionpoints` (
   `description` varchar(45) DEFAULT NULL,
   `title` varchar(45) DEFAULT NULL,
   `resolved` int(1) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `actionpoints`
 --
 
 INSERT INTO `actionpoints` (`point_id`, `item_id`, `user_id`, `date`, `description`, `title`, `resolved`) VALUES
-(2, 98, 1, NULL, 'Test Actionpoint Desc #1.1', 'Test Actionpoint Title #1.1', 0),
+(2, 98, 1, NULL, 'Test Actionpoint Desc #1.1', 'Test Actionpoint Title #1.1', 1),
 (3, 98, 1, NULL, 'Test Actionpoint Desc #1.2', 'Test Actionpoint Title #1.2', 0),
 (4, 99, 1, NULL, 'Test Actionpoint Desc #2.1', 'Test Actionpoint Title #2.1', 0),
 (5, 99, 1, NULL, 'Test Actionpoint Desc #2.2', 'Test Actionpoint Title #2.2', 0),
-(6, 100, 1, NULL, 'Test Actionpoint Desc #3.1', 'Test Actionpoint Title #3.1', 0),
-(7, 100, 1, NULL, 'Test Actionpoint Desc #3.2', 'Test Actionpoint Title #3.2', 0);
+(6, 100, 1, NULL, 'Test Actionpoint Desc #3.1', 'Test Actionpoint Title #3.1', 1),
+(7, 100, 1, NULL, 'Test Actionpoint Desc #3.2', 'Test Actionpoint Title #3.2', 1);
 
 -- --------------------------------------------------------
 
@@ -54,7 +54,7 @@ INSERT INTO `actionpoints` (`point_id`, `item_id`, `user_id`, `date`, `descripti
 -- Table structure for table `agendaitems`
 --
 
-CREATE TABLE IF NOT EXISTS `agendaitems` (
+CREATE TABLE `agendaitems` (
   `item_id` int(11) NOT NULL,
   `attachment_id` int(11) DEFAULT NULL,
   `meeting_id` int(11) DEFAULT NULL,
@@ -64,28 +64,25 @@ CREATE TABLE IF NOT EXISTS `agendaitems` (
   `position` int(11) DEFAULT NULL,
   `time` date DEFAULT NULL,
   `title` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `agendaitems`
 --
 
 INSERT INTO `agendaitems` (`item_id`, `attachment_id`, `meeting_id`, `active`, `default`, `description`, `position`, `time`, `title`) VALUES
-(1, NULL, NULL, 1, 1, '{DESCRIPTION}', 1, NULL, 'Toileteren'),
+(1, NULL, NULL, 1, 1, 'DEFAULT', 1, NULL, 'Toileteren'),
 (2, NULL, NULL, 1, 1, '{DESCRIPTION}', 2, NULL, 'Voorbespreking'),
-(3, NULL, NULL, 0, 1, '{DESCRIPTION}', 4, NULL, 'Agendapunten'),
+(3, NULL, NULL, 0, 1, '{DESCRIPTION}', 5, NULL, 'Agendapunten'),
 (4, NULL, NULL, 1, 1, '{DESCRIPTION}', 0, NULL, 'Actiepunten'),
-(5, NULL, NULL, 0, 1, '{DESCRIPTION}', 5, NULL, 'Leerlingen afzeiken'),
+(5, NULL, NULL, 1, 1, '{DESCRIPTION}', 4, NULL, 'Leerlingen afzeiken'),
 (6, NULL, NULL, 1, 1, '{DESCRIPTION}', 3, NULL, 'Drank'),
-(91, NULL, NULL, 0, 1, 'asd', 6, NULL, 'asd'),
-(97, NULL, NULL, 0, 1, 'njk', 7, NULL, 'jkjsafnjk'),
+(91, NULL, NULL, 0, 1, 'asd', 7, NULL, 'asd'),
+(97, NULL, NULL, 0, 1, 'njk', 8, NULL, 'jkjsafnjk'),
 (98, NULL, 1, 1, 0, 'Test Data Desc #1', NULL, NULL, 'Test Data Title #1'),
 (99, NULL, 1, 1, 0, 'Test Data Desc #2', NULL, NULL, 'Test Data Title #2'),
 (100, NULL, 1, 1, 0, 'Test Data Desc #3', NULL, NULL, 'Test Data Title #3'),
-(114, NULL, 1, 1, 0, '{DESCRIPTION}', NULL, NULL, 'Actiepunten'),
-(115, NULL, 1, 1, 0, '{DESCRIPTION}', 1, NULL, 'Toileteren'),
-(116, NULL, 1, 1, 0, '{DESCRIPTION}', 2, NULL, 'Voorbespreking'),
-(117, NULL, 1, 1, 0, '{DESCRIPTION}', 3, NULL, 'Drank');
+(118, NULL, NULL, 0, 1, 'njksf', 6, NULL, 'njksdf');
 
 -- --------------------------------------------------------
 
@@ -93,7 +90,7 @@ INSERT INTO `agendaitems` (`item_id`, `attachment_id`, `meeting_id`, `active`, `
 -- Table structure for table `attachments`
 --
 
-CREATE TABLE IF NOT EXISTS `attachments` (
+CREATE TABLE `attachments` (
   `attachment_id` int(11) NOT NULL,
   `point_id` int(11) DEFAULT NULL,
   `note_id` int(11) DEFAULT NULL,
@@ -111,18 +108,20 @@ CREATE TABLE IF NOT EXISTS `attachments` (
 -- Table structure for table `meetings`
 --
 
-CREATE TABLE IF NOT EXISTS `meetings` (
+CREATE TABLE `meetings` (
   `meeting_id` int(11) NOT NULL,
+  `parent_id` int(11) NOT NULL,
+  `active` int(1) NOT NULL,
   `date` date DEFAULT NULL,
-  `active` int(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `title` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `meetings`
 --
 
-INSERT INTO `meetings` (`meeting_id`, `date`, `active`) VALUES
-(1, '2016-04-25', 0);
+INSERT INTO `meetings` (`meeting_id`, `parent_id`, `active`, `date`, `title`) VALUES
+(1, 0, 0, '2016-04-25', '');
 
 -- --------------------------------------------------------
 
@@ -130,7 +129,7 @@ INSERT INTO `meetings` (`meeting_id`, `date`, `active`) VALUES
 -- Table structure for table `meetings_users`
 --
 
-CREATE TABLE IF NOT EXISTS `meetings_users` (
+CREATE TABLE `meetings_users` (
   `meeting_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `role_id` int(11) DEFAULT NULL
@@ -151,7 +150,7 @@ INSERT INTO `meetings_users` (`meeting_id`, `user_id`, `role_id`) VALUES
 -- Table structure for table `notes`
 --
 
-CREATE TABLE IF NOT EXISTS `notes` (
+CREATE TABLE `notes` (
   `note_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `point_id` int(11) DEFAULT NULL,
@@ -166,10 +165,10 @@ CREATE TABLE IF NOT EXISTS `notes` (
 -- Table structure for table `role`
 --
 
-CREATE TABLE IF NOT EXISTS `role` (
+CREATE TABLE `role` (
   `role_id` int(11) NOT NULL,
   `desc` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `role`
@@ -187,14 +186,14 @@ INSERT INTO `role` (`role_id`, `desc`) VALUES
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `username` varchar(45) DEFAULT NULL,
   `password` varchar(45) DEFAULT NULL,
   `first_name` varchar(45) DEFAULT NULL,
   `middle_name` varchar(45) DEFAULT NULL,
   `last_name` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
@@ -202,7 +201,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `first_name`, `middle_name`, `last_name`) VALUES
 (1, 'jameyheel', 'test', 'Jamey', 'van', 'Heel'),
-(2, 'kimdewit', 'test', 'Kim', 'de', 'Wit'),
+(2, 'kimwit', 'test', 'Kim', 'de', 'Wit'),
 (3, 'mennobut', 'test', 'Menno', NULL, 'But');
 
 -- --------------------------------------------------------
@@ -211,7 +210,7 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `first_name`, `middle_na
 -- Table structure for table `users_points`
 --
 
-CREATE TABLE IF NOT EXISTS `users_points` (
+CREATE TABLE `users_points` (
   `user_id` int(11) DEFAULT NULL,
   `point_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -234,7 +233,7 @@ INSERT INTO `users_points` (`user_id`, `point_id`) VALUES
 -- Table structure for table `user_items`
 --
 
-CREATE TABLE IF NOT EXISTS `user_items` (
+CREATE TABLE `user_items` (
   `user_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `creator` int(1) NOT NULL
@@ -327,12 +326,12 @@ ALTER TABLE `users_points`
 -- AUTO_INCREMENT for table `actionpoints`
 --
 ALTER TABLE `actionpoints`
-  MODIFY `point_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `point_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `agendaitems`
 --
 ALTER TABLE `agendaitems`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=118;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 --
 -- AUTO_INCREMENT for table `attachments`
 --
@@ -342,17 +341,17 @@ ALTER TABLE `attachments`
 -- AUTO_INCREMENT for table `meetings`
 --
 ALTER TABLE `meetings`
-  MODIFY `meeting_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `meeting_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Constraints for dumped tables
 --
